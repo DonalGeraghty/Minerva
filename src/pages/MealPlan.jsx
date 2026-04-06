@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { API_ENDPOINTS, authFetch } from '../config/api'
+import mealPlanNutrition from '../data/mealPlanNutrition.json'
 import './HubPage.css'
 import './MealPlan.css'
 
@@ -28,6 +29,49 @@ function defaultSelections(sections) {
   return out
 }
 
+const SECTION_NUTRITION_ESTIMATES = mealPlanNutrition?.sections || {}
+const PROVIDED_TOTALS = mealPlanNutrition?.totals || null
+
+function calcNutritionTotals(sections) {
+  let calories = 0
+  let protein = 0
+  let carbs = 0
+  let fat = 0
+  const perSection = []
+  for (const section of sections) {
+    const n = SECTION_NUTRITION_ESTIMATES[section.id] || { calories: 0, protein: 0, carbs: 0, fat: 0 }
+    calories += n.calories
+    protein += n.protein
+    carbs += n.carbs
+    fat += n.fat
+    perSection.push({
+      id: section.id,
+      label: section.label,
+      calories: n.calories,
+    })
+  }
+  const fallbackTotals = {
+    calories: Math.round(calories),
+    protein: Math.round(protein * 10) / 10,
+    carbs: Math.round(carbs * 10) / 10,
+    fat: Math.round(fat * 10) / 10,
+  }
+  const totalsFromJson =
+    PROVIDED_TOTALS &&
+    typeof PROVIDED_TOTALS.calories === 'number' &&
+    typeof PROVIDED_TOTALS.protein === 'number' &&
+    typeof PROVIDED_TOTALS.carbs === 'number' &&
+    typeof PROVIDED_TOTALS.fat === 'number'
+      ? {
+          calories: Math.round(PROVIDED_TOTALS.calories),
+          protein: Math.round(PROVIDED_TOTALS.protein * 10) / 10,
+          carbs: Math.round(PROVIDED_TOTALS.carbs * 10) / 10,
+          fat: Math.round(PROVIDED_TOTALS.fat * 10) / 10,
+        }
+      : fallbackTotals
+  return { ...totalsFromJson, perSection }
+}
+
 function defaultCompleted(sections) {
   const out = {}
   for (const section of sections) out[section.id] = false
@@ -50,8 +94,11 @@ function normalizeEntry(entry, sections, dateKey) {
 
   for (const section of sections) {
     const sectionId = section.id
+    const onlyOptionId = Array.isArray(section.options) && section.options.length === 1 ? section.options[0].id : ''
     const optionId = incomingSelections[sectionId]
-    if (typeof optionId === 'string' && (validBySection.get(sectionId)?.has(optionId) || optionId === '')) {
+    if (typeof optionId === 'string' && validBySection.get(sectionId)?.has(optionId)) {
+      baseSelections[sectionId] = optionId
+    } else if (typeof optionId === 'string' && optionId === '' && !onlyOptionId) {
       baseSelections[sectionId] = optionId
     }
     const done = incomingCompleted[sectionId]
@@ -170,9 +217,12 @@ function MealPlan() {
     return { done, total }
   }, [sections, completed])
 
-  const onSelectOption = (sectionId, optionId) => {
-    setSelections((prev) => ({ ...prev, [sectionId]: optionId }))
-  }
+  const nutrition = useMemo(() => calcNutritionTotals(sections), [sections])
+  const maxSectionCalories = useMemo(
+    () => Math.max(1, ...nutrition.perSection.map((s) => s.calories)),
+    [nutrition],
+  )
+  const macroMax = useMemo(() => Math.max(1, nutrition.protein, nutrition.carbs, nutrition.fat), [nutrition])
 
   const onToggleDone = (sectionId) => {
     setCompleted((prev) => ({ ...prev, [sectionId]: !prev[sectionId] }))
@@ -183,7 +233,7 @@ function MealPlan() {
       <div className="hub-inner meal-plan">
         <header className="hub-header">
           <h1 className="hub-title">Trainer recipes</h1>
-          <p className="hub-sub">Choose one option from each section and tick it when completed.</p>
+          <p className="hub-sub">Single-path plan: follow each section and tick it when completed.</p>
         </header>
 
         <p className="hub-body">
@@ -196,8 +246,8 @@ function MealPlan() {
         {!ready ? <p className="hub-body">Loading recipes...</p> : null}
 
         {sections.map((section) => {
-          const sectionSelection = selections[section.id] || ''
-          const canMarkDone = Boolean(sectionSelection)
+          const sectionSelection =
+            selections[section.id] || (Array.isArray(section.options) && section.options.length === 1 ? section.options[0].id : '')
           return (
             <section key={section.id} className="hub-card meal-plan-card" aria-label={section.label}>
               <div className="meal-plan-card-head">
@@ -207,29 +257,73 @@ function MealPlan() {
                     type="checkbox"
                     checked={Boolean(completed[section.id])}
                     onChange={() => onToggleDone(section.id)}
-                    disabled={!canMarkDone}
                   />
                   <span>Done today</span>
                 </label>
               </div>
 
               <div className="meal-plan-options">
-                {section.options.map((option) => (
-                  <label key={option.id} className="meal-plan-option">
-                    <input
-                      type="radio"
-                      name={`meal-plan-${section.id}`}
-                      value={option.id}
-                      checked={sectionSelection === option.id}
-                      onChange={() => onSelectOption(section.id, option.id)}
-                    />
-                    <span>{option.label}</span>
-                  </label>
-                ))}
+                {section.options
+                  .filter((option) => option.id === sectionSelection)
+                  .map((option) => (
+                    <p key={option.id} className="meal-plan-fixed-option">
+                      {option.label}
+                    </p>
+                  ))}
               </div>
             </section>
           )
         })}
+
+        <section className="hub-card meal-plan-chart-card" aria-label="Estimated daily calories">
+          <h2>Estimated daily calories</h2>
+          <p className="hub-body">
+            Expected total if the full plan is followed: <strong>{nutrition.calories} kcal</strong>.
+          </p>
+          <div className="meal-plan-bars">
+            {nutrition.perSection.map((row) => (
+              <div key={row.id} className="meal-plan-bar-row">
+                <span className="meal-plan-bar-label">{row.label}</span>
+                <div className="meal-plan-bar-track" role="presentation">
+                  <div
+                    className="meal-plan-bar-fill"
+                    style={{ width: `${(row.calories / maxSectionCalories) * 100}%` }}
+                  />
+                </div>
+                <span className="meal-plan-bar-value">{row.calories} kcal</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="hub-card meal-plan-chart-card" aria-label="Estimated daily macros">
+          <h2>Estimated daily macros</h2>
+          <p className="hub-body">
+            Protein <strong>{nutrition.protein}g</strong>, carbs <strong>{nutrition.carbs}g</strong>, fat <strong>{nutrition.fat}g</strong>.
+          </p>
+          <div className="meal-plan-bars">
+            {[
+              { id: 'protein', label: 'Protein', value: nutrition.protein },
+              { id: 'carbs', label: 'Carbs', value: nutrition.carbs },
+              { id: 'fat', label: 'Fat', value: nutrition.fat },
+            ].map((row) => (
+              <div key={row.id} className="meal-plan-bar-row">
+                <span className="meal-plan-bar-label">{row.label}</span>
+                <div className="meal-plan-bar-track" role="presentation">
+                  <div
+                    className={`meal-plan-bar-fill meal-plan-bar-fill--${row.id}`}
+                    style={{ width: `${(row.value / macroMax) * 100}%` }}
+                  />
+                </div>
+                <span className="meal-plan-bar-value">{row.value} g</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <p className="hub-body meal-plan-note">
+          Macro/calorie values are estimates based on typical nutrition data for the listed serving sizes.
+        </p>
       </div>
     </main>
   )

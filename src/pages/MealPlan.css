@@ -45,3 +45,70 @@
 .meal-plan-option input {
   margin-top: 0.15rem;
 }
+
+.meal-plan-fixed-option {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  line-height: 1.45;
+}
+
+.meal-plan-chart-card {
+  gap: 0.65rem;
+}
+
+.meal-plan-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.55rem;
+}
+
+.meal-plan-bar-row {
+  display: grid;
+  grid-template-columns: minmax(6.8rem, 8rem) 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.meal-plan-bar-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.meal-plan-bar-track {
+  height: 0.56rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-tertiary);
+  overflow: hidden;
+}
+
+.meal-plan-bar-fill {
+  height: 100%;
+  min-width: 2px;
+  background: var(--accent-color);
+}
+
+.meal-plan-bar-fill--protein {
+  background: #3b82f6;
+}
+
+.meal-plan-bar-fill--carbs {
+  background: #f59e0b;
+}
+
+.meal-plan-bar-fill--fat {
+  background: #ef4444;
+}
+
+.meal-plan-bar-value {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.meal-plan-note {
+  font-size: 0.8rem;
+}

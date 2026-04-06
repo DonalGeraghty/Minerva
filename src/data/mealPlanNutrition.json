@@ -1,0 +1,9 @@
+{
+  "totals": { "calories": 1800, "protein": 110.1, "carbs": 53.0, "fat": 137.1 },
+  "sections": {
+    "onRising": { "calories": 52, "protein": 1.0, "carbs": 13.0, "fat": 0.2 },
+    "breakfast": { "calories": 442, "protein": 18.7, "carbs": 17.0, "fat": 37.0 },
+    "lunch": { "calories": 622, "protein": 34.0, "carbs": 10.0, "fat": 51.5 },
+    "dinner": { "calories": 684, "protein": 56.4, "carbs": 13.0, "fat": 48.4 }
+  }
+}

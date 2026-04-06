@@ -20,6 +20,7 @@ export const API_ENDPOINTS = {
   USER_STOIC: '/api/user/stoic',
   DAY_PLANNER_OPTIONS: '/api/user/day-planner/options',
   DAY_PLANNER_DAILY: '/api/user/day-planner/daily',
+  USER_MEAL_PLAN: '/api/user/meal-plan',
 }
 
 const TOKEN_KEY = 'dg_auth_token'

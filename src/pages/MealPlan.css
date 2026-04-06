@@ -1,0 +1,47 @@
+.meal-plan-progress {
+  margin-top: -0.35rem;
+}
+
+.meal-plan-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.meal-plan-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.meal-plan-done {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.meal-plan-done input {
+  margin: 0;
+}
+
+.meal-plan-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.meal-plan-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  line-height: 1.45;
+}
+
+.meal-plan-option input {
+  margin-top: 0.15rem;
+}

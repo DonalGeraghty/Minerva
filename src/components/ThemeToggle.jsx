@@ -6,8 +6,10 @@ const ThemeToggle = () => {
   const { isDarkMode, toggleTheme } = useTheme();
 
   return (
-    <button 
-      className="theme-toggle" 
+    <button
+      type="button"
+      className="theme-toggle"
+      data-testid="theme-toggle"
       onClick={toggleTheme}
       aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
     >

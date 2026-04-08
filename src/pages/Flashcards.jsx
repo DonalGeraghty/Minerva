@@ -287,12 +287,13 @@ function Flashcards() {
             <input
               type="text"
               className="flashcards-input"
+              data-testid="flashcards-new-group-name"
               placeholder="e.g. Numbers, Greetings, Verbs"
               value={groupName}
               onChange={(e) => setGroupName(e.target.value)}
               maxLength={80}
             />
-            <button type="submit" className="flashcards-btn" disabled={!groupName.trim() || savingGroup}>
+            <button type="submit" className="flashcards-btn" data-testid="flashcards-add-group" disabled={!groupName.trim() || savingGroup}>
               {savingGroup ? 'Adding…' : 'Add group'}
             </button>
           </form>
@@ -303,6 +304,7 @@ function Flashcards() {
           <div className="flashcards-form-grid">
             <select
               className="flashcards-input"
+              data-testid="flashcards-add-card-group"
               value={selectedGroupId}
               onChange={(e) => setSelectedGroupId(e.target.value)}
             >
@@ -320,6 +322,7 @@ function Flashcards() {
             <input
               type="text"
               className="flashcards-input"
+              data-testid="flashcards-card-front"
               placeholder="Front (e.g. Hello)"
               value={front}
               onChange={(e) => setFront(e.target.value)}
@@ -328,6 +331,7 @@ function Flashcards() {
             <input
               type="text"
               className="flashcards-input"
+              data-testid="flashcards-card-back"
               placeholder="Back (e.g. नमस्ते)"
               value={back}
               onChange={(e) => setBack(e.target.value)}
@@ -336,6 +340,7 @@ function Flashcards() {
             <button
               type="button"
               className="flashcards-btn"
+              data-testid="flashcards-add-card"
               onClick={() => void addCard()}
               disabled={!selectedGroupId || !front.trim() || !back.trim() || savingCard}
             >
@@ -358,6 +363,7 @@ function Flashcards() {
           <div className="flashcards-form-grid">
             <select
               className="flashcards-input"
+              data-testid="flashcards-study-group"
               value={selectedGroupId}
               onChange={(e) => {
                 setSelectedGroupId(e.target.value)
@@ -376,12 +382,13 @@ function Flashcards() {
             </select>
           </div>
           <div className="flashcards-study-controls">
-            <button type="button" className="flashcards-btn" onClick={() => void loadStudyCards('')}>
+            <button type="button" className="flashcards-btn" data-testid="flashcards-shuffle-all" onClick={() => void loadStudyCards('')}>
               Shuffle all groups
             </button>
             <button
               type="button"
               className="flashcards-btn ghost"
+              data-testid="flashcards-shuffle-selected"
               onClick={() => void loadStudyCards(selectedGroupId)}
               disabled={!selectedGroupId}
             >
@@ -395,12 +402,13 @@ function Flashcards() {
               <p className="flashcards-study-front">{currentCard.front}</p>
               {showBack ? <p className="flashcards-study-back">{currentCard.back}</p> : null}
               <div className="flashcards-study-actions">
-                <button type="button" className="flashcards-btn ghost" onClick={() => setShowBack((v) => !v)}>
+                <button type="button" className="flashcards-btn ghost" data-testid="flashcards-toggle-answer" onClick={() => setShowBack((v) => !v)}>
                   {showBack ? 'Hide answer' : 'Show answer'}
                 </button>
                 <button
                   type="button"
                   className="flashcards-btn"
+                  data-testid="flashcards-next-card"
                   onClick={() => {
                     setStudyIndex((i) => (i + 1 < studyCards.length ? i + 1 : 0))
                     setShowBack(false)
@@ -423,6 +431,7 @@ function Flashcards() {
           <div className="flashcards-form-grid">
             <select
               className="flashcards-input"
+              data-testid="flashcards-manage-group"
               value={selectedGroupId}
               onChange={(e) => {
                 setSelectedGroupId(e.target.value)
@@ -442,6 +451,7 @@ function Flashcards() {
             <button
               type="button"
               className="flashcards-btn danger"
+              data-testid="flashcards-delete-group"
               onClick={() => void deleteGroup()}
               disabled={!selectedGroupId || savingManage}
             >
@@ -460,6 +470,7 @@ function Flashcards() {
                         <input
                           type="text"
                           className="flashcards-input"
+                          data-testid={`flashcards-edit-front-${card.id}`}
                           value={editFront}
                           onChange={(e) => setEditFront(e.target.value)}
                           maxLength={240}
@@ -470,6 +481,7 @@ function Flashcards() {
                         <input
                           type="text"
                           className="flashcards-input"
+                          data-testid={`flashcards-edit-back-${card.id}`}
                           value={editBack}
                           onChange={(e) => setEditBack(e.target.value)}
                           maxLength={240}
@@ -479,12 +491,13 @@ function Flashcards() {
                         <button
                           type="button"
                           className="flashcards-btn"
+                          data-testid={`flashcards-save-card-${card.id}`}
                           onClick={() => void updateCard()}
                           disabled={!editFront.trim() || !editBack.trim() || savingManage}
                         >
                           {savingManage ? 'Saving…' : 'Save'}
                         </button>
-                        <button type="button" className="flashcards-btn ghost" onClick={cancelEditCard} disabled={savingManage}>
+                        <button type="button" className="flashcards-btn ghost" data-testid={`flashcards-cancel-edit-${card.id}`} onClick={cancelEditCard} disabled={savingManage}>
                           Cancel
                         </button>
                       </div>
@@ -494,10 +507,10 @@ function Flashcards() {
                       <p className="flashcards-grid-side"><strong>Front:</strong> {card.front}</p>
                       <p className="flashcards-grid-side"><strong>Back:</strong> {card.back}</p>
                       <div className="flashcards-grid-actions">
-                        <button type="button" className="flashcards-btn ghost" onClick={() => beginEditCard(card)} disabled={savingManage}>
+                        <button type="button" className="flashcards-btn ghost" data-testid={`flashcards-edit-card-${card.id}`} onClick={() => beginEditCard(card)} disabled={savingManage}>
                           Edit
                         </button>
-                        <button type="button" className="flashcards-btn danger" onClick={() => void deleteCard(card.id)} disabled={savingManage}>
+                        <button type="button" className="flashcards-btn danger" data-testid={`flashcards-delete-card-${card.id}`} onClick={() => void deleteCard(card.id)} disabled={savingManage}>
                           Delete
                         </button>
                       </div>

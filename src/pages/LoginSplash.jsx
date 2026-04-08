@@ -39,6 +39,7 @@ function LoginSplash() {
           <button
             type="button"
             role="tab"
+            data-testid="login-tab-sign-in"
             aria-selected={mode === 'login'}
             className={mode === 'login' ? 'active' : ''}
             onClick={() => {
@@ -51,6 +52,7 @@ function LoginSplash() {
           <button
             type="button"
             role="tab"
+            data-testid="login-tab-register"
             aria-selected={mode === 'register'}
             className={mode === 'register' ? 'active' : ''}
             onClick={() => {
@@ -66,6 +68,7 @@ function LoginSplash() {
             <label htmlFor="splash-email">Email</label>
             <input
               id="splash-email"
+              data-testid="login-email"
               type="email"
               autoComplete="email"
               value={email}
@@ -79,6 +82,7 @@ function LoginSplash() {
             <label htmlFor="splash-password">Password</label>
             <input
               id="splash-password"
+              data-testid="login-password"
               type="password"
               autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
               value={password}
@@ -90,7 +94,7 @@ function LoginSplash() {
             />
           </div>
           {error && <div className="login-splash-error">{error}</div>}
-          <button type="submit" className="login-splash-submit" disabled={submitting}>
+          <button type="submit" className="login-splash-submit" data-testid="login-submit" disabled={submitting}>
             {submitting ? 'Please wait…' : mode === 'login' ? 'Sign in' : 'Register'}
           </button>
         </form>

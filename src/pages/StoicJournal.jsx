@@ -371,13 +371,14 @@ function StoicJournal() {
               <input
                 className="hub-input"
                 type="text"
+                data-testid="stoic-planner-new-activity"
                 value={newPlannerLabel}
                 onChange={(e) => setNewPlannerLabel(e.target.value)}
                 placeholder="New activity name"
                 maxLength={120}
                 aria-label="New activity name"
               />
-              <button type="button" className="hub-btn" onClick={() => void addPlannerOption()} disabled={!email}>
+              <button type="button" className="hub-btn" data-testid="stoic-planner-add-activity" onClick={() => void addPlannerOption()} disabled={!email}>
                 Add
               </button>
             </div>
@@ -389,6 +390,7 @@ function StoicJournal() {
                       <input
                         className="hub-input"
                         type="text"
+                        data-testid={`stoic-planner-option-name-${o.id}`}
                         value={editingPlannerLabel}
                         onChange={(e) => setEditingPlannerLabel(e.target.value)}
                         maxLength={120}
@@ -397,6 +399,7 @@ function StoicJournal() {
                       <button
                         type="button"
                         className="hub-btn"
+                        data-testid={`stoic-planner-option-save-${o.id}`}
                         onClick={() => void savePlannerOptionEdit(o.id)}
                         disabled={!email}
                       >
@@ -405,6 +408,7 @@ function StoicJournal() {
                       <button
                         type="button"
                         className="hub-btn"
+                        data-testid={`stoic-planner-option-cancel-${o.id}`}
                         onClick={() => {
                           setEditingPlannerId(null)
                           setEditingPlannerLabel('')
@@ -419,6 +423,7 @@ function StoicJournal() {
                       <button
                         type="button"
                         className="hub-btn"
+                        data-testid={`stoic-planner-option-edit-${o.id}`}
                         onClick={() => {
                           setEditingPlannerId(o.id)
                           setEditingPlannerLabel(o.label)
@@ -430,6 +435,7 @@ function StoicJournal() {
                       <button
                         type="button"
                         className="hub-btn"
+                        data-testid={`stoic-planner-option-delete-${o.id}`}
                         onClick={() => void deletePlannerOption(o.id)}
                         disabled={!email}
                       >
@@ -449,6 +455,7 @@ function StoicJournal() {
                   <span className="hub-day-planner-hour-label">{hourRangeLabel(h)}</span>
                   <select
                     className="hub-input hub-day-planner-select"
+                    data-testid={`stoic-planner-hour-${h}-select`}
                     value={plannerSlots[key] || ''}
                     onChange={onPlannerSlotChange(key)}
                     disabled={!email || !dailyPlannerReady}
@@ -510,6 +517,7 @@ function StoicJournal() {
               <span>Top priority for today</span>
               <textarea
                 className="hub-input"
+                data-testid="stoic-journal-morning-focus"
                 value={form.morningFocus}
                 onChange={onChange('morningFocus')}
                 rows={2}
@@ -520,6 +528,7 @@ function StoicJournal() {
               <span>Likely challenge</span>
               <textarea
                 className="hub-input"
+                data-testid="stoic-journal-likely-challenge"
                 value={form.likelyChallenge}
                 onChange={onChange('likelyChallenge')}
                 rows={2}
@@ -530,6 +539,7 @@ function StoicJournal() {
               <span>Virtue to practice</span>
               <input
                 className="hub-input"
+                data-testid="stoic-journal-virtue"
                 value={form.virtueToPractice}
                 onChange={onChange('virtueToPractice')}
                 placeholder="Wisdom, courage, justice, temperance..."
@@ -545,6 +555,7 @@ function StoicJournal() {
               <span>What went well?</span>
               <textarea
                 className="hub-input"
+                data-testid="stoic-journal-evening-win"
                 value={form.eveningWin}
                 onChange={onChange('eveningWin')}
                 rows={2}
@@ -555,6 +566,7 @@ function StoicJournal() {
               <span>What to improve?</span>
               <textarea
                 className="hub-input"
+                data-testid="stoic-journal-evening-improve"
                 value={form.eveningImprove}
                 onChange={onChange('eveningImprove')}
                 rows={2}
@@ -565,6 +577,7 @@ function StoicJournal() {
               <span>One action for tomorrow</span>
               <input
                 className="hub-input"
+                data-testid="stoic-journal-next-action"
                 value={form.nextAction}
                 onChange={onChange('nextAction')}
                 placeholder="Small next step..."

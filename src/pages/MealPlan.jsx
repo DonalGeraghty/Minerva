@@ -255,6 +255,7 @@ function MealPlan() {
                 <label className="meal-plan-done">
                   <input
                     type="checkbox"
+                    data-testid={`meal-plan-section-${section.id}-done`}
                     checked={Boolean(completed[section.id])}
                     onChange={() => onToggleDone(section.id)}
                   />

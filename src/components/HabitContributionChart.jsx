@@ -113,6 +113,7 @@ function HabitContributionChart({ habit, cells, now = new Date() }) {
                         key={`${wi}-${ymd}`}
                         type="button"
                         className={cls}
+                        data-testid={`habit-contrib-${habit.id}-${ymd}`}
                         aria-label={title}
                         title={title}
                         onMouseEnter={() => setTipLine(title)}

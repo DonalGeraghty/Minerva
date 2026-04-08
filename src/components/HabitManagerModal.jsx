@@ -170,7 +170,7 @@ function HabitManagerModal({ onClose }) {
       <div className="hm-modal-content" onClick={(e) => e.stopPropagation()}>
         <header className="hm-modal-header">
           <h2>Manage Habits</h2>
-          <button type="button" className="hm-btn-close" onClick={onClose}>
+          <button type="button" className="hm-btn-close" data-testid="habit-manager-close" onClick={onClose}>
             ×
           </button>
         </header>
@@ -184,6 +184,7 @@ function HabitManagerModal({ onClose }) {
                 <span>Move habits to</span>
                 <select
                   className="hm-input"
+                  data-testid="habit-manager-reassign-category"
                   value={reassignPick}
                   onChange={(e) => setReassignPick(e.target.value)}
                 >
@@ -200,6 +201,7 @@ function HabitManagerModal({ onClose }) {
                 <button
                   type="button"
                   className="hm-btn hm-btn-secondary"
+                  data-testid="habit-manager-reassign-cancel"
                   onClick={() => setPendingDeleteCategory(null)}
                   disabled={isSubmitting}
                 >
@@ -208,6 +210,7 @@ function HabitManagerModal({ onClose }) {
                 <button
                   type="button"
                   className="hm-btn hm-btn-danger"
+                  data-testid="habit-manager-reassign-confirm"
                   onClick={() => void confirmDeleteCategoryWithReassign()}
                   disabled={isSubmitting}
                 >
@@ -224,6 +227,7 @@ function HabitManagerModal({ onClose }) {
                 <input
                   type="text"
                   className="hm-input"
+                  data-testid="habit-manager-category-name"
                   value={catFormData.label}
                   onChange={(e) => setCatFormData({ label: e.target.value })}
                   placeholder="e.g. Health"
@@ -234,6 +238,7 @@ function HabitManagerModal({ onClose }) {
                 <button
                   type="button"
                   className="hm-btn hm-btn-secondary"
+                  data-testid="habit-manager-category-edit-cancel"
                   onClick={() => {
                     setEditingCategoryId(null)
                     setError('')
@@ -241,7 +246,7 @@ function HabitManagerModal({ onClose }) {
                 >
                   Cancel
                 </button>
-                <button type="submit" className="hm-btn hm-btn-primary" disabled={isSubmitting}>
+                <button type="submit" className="hm-btn hm-btn-primary" data-testid="habit-manager-category-save" disabled={isSubmitting}>
                   {isSubmitting ? 'Saving…' : 'Save'}
                 </button>
               </div>
@@ -257,6 +262,7 @@ function HabitManagerModal({ onClose }) {
                 <input
                   type="text"
                   className="hm-input"
+                  data-testid="habit-manager-habit-id"
                   value={formData.id}
                   onChange={(e) => setFormData({ ...formData, id: e.target.value })}
                   disabled={!isNew}
@@ -269,6 +275,7 @@ function HabitManagerModal({ onClose }) {
                 <input
                   type="text"
                   className="hm-input"
+                  data-testid="habit-manager-habit-label"
                   value={formData.label}
                   onChange={(e) => setFormData({ ...formData, label: e.target.value })}
                   placeholder="e.g. Morning Run"
@@ -279,6 +286,7 @@ function HabitManagerModal({ onClose }) {
                 <span>Category</span>
                 <select
                   className="hm-input"
+                  data-testid="habit-manager-habit-category"
                   value={formData.category}
                   onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                   disabled={habitCategories.length === 0}
@@ -296,10 +304,10 @@ function HabitManagerModal({ onClose }) {
               </label>
 
               <div className="hm-form-actions">
-                <button type="button" className="hm-btn hm-btn-secondary" onClick={() => setEditingId(null)}>
+                <button type="button" className="hm-btn hm-btn-secondary" data-testid="habit-manager-habit-cancel" onClick={() => setEditingId(null)}>
                   Cancel
                 </button>
-                <button type="submit" className="hm-btn hm-btn-primary" disabled={isSubmitting}>
+                <button type="submit" className="hm-btn hm-btn-primary" data-testid="habit-manager-habit-save" disabled={isSubmitting}>
                   {isSubmitting ? 'Saving...' : 'Save Habit'}
                 </button>
               </div>
@@ -315,6 +323,7 @@ function HabitManagerModal({ onClose }) {
                   <input
                     type="text"
                     className="hm-input"
+                    data-testid="habit-manager-new-category"
                     value={newCatLabel}
                     onChange={(e) => setNewCatLabel(e.target.value)}
                     placeholder="New category name"
@@ -324,6 +333,7 @@ function HabitManagerModal({ onClose }) {
                   <button
                     type="button"
                     className="hm-btn hm-btn-primary hm-btn-sm"
+                    data-testid="habit-manager-add-category"
                     onClick={async () => {
                       const label = newCatLabel.trim()
                       if (!label) return
@@ -347,6 +357,7 @@ function HabitManagerModal({ onClose }) {
                           <button
                             type="button"
                             className="hm-btn hm-btn-secondary hm-btn-sm"
+                            data-testid={`habit-manager-category-edit-${c.id}`}
                             onClick={() => startEditCategory(c)}
                           >
                             Edit
@@ -354,6 +365,7 @@ function HabitManagerModal({ onClose }) {
                           <button
                             type="button"
                             className="hm-btn hm-btn-danger hm-btn-sm"
+                            data-testid={`habit-manager-category-delete-${c.id}`}
                             onClick={() => tryDeleteCategory(c)}
                           >
                             Delete
@@ -381,12 +393,13 @@ function HabitManagerModal({ onClose }) {
                           </span>
                         </div>
                         <div className="hm-item-actions">
-                          <button type="button" className="hm-btn hm-btn-secondary hm-btn-sm" onClick={() => handleEdit(h)}>
+                          <button type="button" className="hm-btn hm-btn-secondary hm-btn-sm" data-testid={`habit-manager-habit-edit-${h.id}`} onClick={() => handleEdit(h)}>
                             Edit
                           </button>
                           <button
                             type="button"
                             className="hm-btn hm-btn-danger hm-btn-sm"
+                            data-testid={`habit-manager-habit-delete-${h.id}`}
                             onClick={() => handleDelete(h.id)}
                           >
                             Delete
@@ -398,7 +411,7 @@ function HabitManagerModal({ onClose }) {
                 )}
 
                 <div className="hm-section-footer">
-                  <button type="button" className="hm-btn hm-btn-primary" onClick={handleNew}>
+                  <button type="button" className="hm-btn hm-btn-primary" data-testid="habit-manager-add-habit" onClick={handleNew}>
                     + Add Habit
                   </button>
                 </div>

@@ -98,6 +98,7 @@ function Navbar() {
             <button
               type="button"
               className="nav-link nav-dropdown-btn"
+              data-testid="nav-profile-menu"
               onClick={() => {
                 setProfileOpen((v) => !v)
                 setMoreOpen(false)
@@ -123,7 +124,14 @@ function Navbar() {
               <div className="nav-theme-wrap">
                 <ThemeToggle />
               </div>
-              <button type="button" className="nav-dropdown-link nav-dropdown-link-btn nav-logout" onClick={handleLogout}>Sign out</button>
+              <button
+                type="button"
+                className="nav-dropdown-link nav-dropdown-link-btn nav-logout"
+                data-testid="nav-sign-out"
+                onClick={handleLogout}
+              >
+                Sign out
+              </button>
             </div>
           </div>
         </div>
@@ -132,7 +140,9 @@ function Navbar() {
         <div className="nav-mobile-controls">
           <ThemeToggle />
           <button
+            type="button"
             className="nav-hamburger"
+            data-testid="nav-mobile-menu"
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((o) => !o)}
@@ -173,7 +183,7 @@ function Navbar() {
         <Link to="/account" className="nav-drawer-link" onClick={scrollToTop}>
           Account
         </Link>
-        <button type="button" className="nav-drawer-link nav-drawer-logout" onClick={handleLogout}>
+        <button type="button" className="nav-drawer-link nav-drawer-logout" data-testid="nav-drawer-sign-out" onClick={handleLogout}>
           Sign out
         </button>
         <div className="nav-drawer-time">

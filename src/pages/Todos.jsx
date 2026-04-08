@@ -145,6 +145,7 @@ function Todos() {
           <input
             className="todo-input"
             type="text"
+            data-testid="todos-new-text"
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Add a new todo…"
@@ -152,7 +153,7 @@ function Todos() {
             aria-label="Todo text"
             disabled={adding}
           />
-          <button type="submit" className="todo-add-btn" disabled={!canAdd}>
+          <button type="submit" className="todo-add-btn" data-testid="todos-add-submit" disabled={!canAdd}>
             {adding ? 'Adding…' : 'Add'}
           </button>
         </form>
@@ -170,6 +171,7 @@ function Todos() {
                 <label className="todo-check" title="Complete and delete">
                   <input
                     type="checkbox"
+                    data-testid={`todos-complete-${t.id}`}
                     onChange={(e) => {
                       if (e.target.checked) void completeTodo(t.id)
                     }}

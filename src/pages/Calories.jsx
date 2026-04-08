@@ -223,6 +223,7 @@ function Calories() {
               <input
                 className="hub-input"
                 type="number"
+                data-testid="calories-input"
                 min="0"
                 step="1"
                 placeholder="e.g. 2250"
@@ -243,6 +244,7 @@ function Calories() {
               <input
                 className="hub-input"
                 type="number"
+                data-testid="weight-input"
                 min="0"
                 step="0.1"
                 placeholder="e.g. 78.4"
@@ -268,10 +270,10 @@ function Calories() {
               Today: <strong>{todayWaterMl} ml</strong>
             </p>
             <div className="hub-water-actions">
-              <button type="button" className="hub-btn" onClick={() => addWater(GLASS_ML)}>
+              <button type="button" className="hub-btn" data-testid="water-add-glass" onClick={() => addWater(GLASS_ML)}>
                 +1 glass ({GLASS_ML} ml)
               </button>
-              <button type="button" className="hub-btn" onClick={() => addWater(PINT_ML)}>
+              <button type="button" className="hub-btn" data-testid="water-add-pint" onClick={() => addWater(PINT_ML)}>
                 +1 pint ({PINT_ML} ml)
               </button>
             </div>
@@ -279,6 +281,7 @@ function Calories() {
               <input
                 className="hub-input"
                 type="number"
+                data-testid="water-custom-ml"
                 min="1"
                 step="1"
                 placeholder="Custom ml amount"
@@ -288,6 +291,7 @@ function Calories() {
               <button
                 type="button"
                 className="hub-btn"
+                data-testid="water-add-custom"
                 onClick={() => {
                   const n = Number.parseInt(waterCustomInput, 10)
                   if (Number.isFinite(n) && n > 0) {

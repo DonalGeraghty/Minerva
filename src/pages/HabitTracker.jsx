@@ -109,7 +109,7 @@ function HabitTracker() {
         {error && (
           <div className="habit-error" role="alert">
             <span>{error}</span>
-            <button type="button" className="habit-error-retry" onClick={() => reload()}>
+            <button type="button" className="habit-error-retry" data-testid="habits-reload-error" onClick={() => reload()}>
               Retry
             </button>
           </div>
@@ -136,6 +136,7 @@ function HabitTracker() {
             type="button"
             className="habit-nav-btn"
             style={{ fontWeight: 'bold' }}
+            data-testid="habits-open-manager"
             onClick={() => setShowManager(true)}
           >
             ⚙️ Manage Habits
@@ -146,6 +147,7 @@ function HabitTracker() {
           <button
             type="button"
             className="habit-nav-btn"
+            data-testid="habits-week-prev"
             onClick={() => setWeekOffset((o) => o - 1)}
             aria-label="Previous week"
           >
@@ -155,13 +157,19 @@ function HabitTracker() {
           <button
             type="button"
             className="habit-nav-btn"
+            data-testid="habits-week-next"
             onClick={() => setWeekOffset((o) => o + 1)}
             aria-label="Next week"
           >
             Next →
           </button>
           {weekOffset !== 0 && (
-            <button type="button" className="habit-nav-btn habit-nav-today" onClick={() => setWeekOffset(0)}>
+            <button
+              type="button"
+              className="habit-nav-btn habit-nav-today"
+              data-testid="habits-week-today"
+              onClick={() => setWeekOffset(0)}
+            >
               This week
             </button>
           )}
@@ -213,6 +221,7 @@ function HabitTracker() {
                         <button
                           type="button"
                           className={`habit-cell habit-cell--${state} ${isTodayYmd(ymd, now) ? 'is-today-cell' : ''}`}
+                          data-testid={`habit-cell-${ymd}-${h.id}`}
                           disabled={future || !email}
                           onClick={() => handleCell(ymd, h.id)}
                           aria-label={`${h.label} on ${ymd}: ${state}`}

@@ -57,6 +57,7 @@ function AccountPage() {
             </label>
             <input
               id="delete-password"
+              data-testid="account-delete-password"
               type="password"
               autoComplete="current-password"
               value={password}
@@ -70,7 +71,7 @@ function AccountPage() {
                 {error}
               </div>
             )}
-            <button type="submit" className="account-delete-submit" disabled={busy}>
+            <button type="submit" className="account-delete-submit" data-testid="account-delete-submit" disabled={busy}>
               {busy ? 'Deleting…' : 'Delete my account'}
             </button>
           </form>

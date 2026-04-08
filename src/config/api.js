@@ -5,6 +5,7 @@ export const API_ENDPOINTS = {
   AUTH_REGISTER: '/api/auth/register',
   AUTH_LOGIN: '/api/auth/login',
   AUTH_ME: '/api/auth/me',
+  AUTH_DELETE_ACCOUNT: '/api/auth/account',
   HABITS_GET: '/api/habits',
   HABITS_PUT: '/api/habits',
   HABITS_PATCH_CELL: '/api/habits/cell',

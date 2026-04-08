@@ -6,6 +6,7 @@ import {
   getStoredToken,
   setStoredToken,
 } from '../config/api'
+import { clearLegacyLocalCells } from '../habits/habitStorage'
 
 const AuthContext = createContext(null)
 
@@ -78,6 +79,27 @@ export function AuthProvider({ children }) {
     return data
   }, [])
 
+  const deleteAccount = useCallback(async (password) => {
+    const email = user?.email
+    if (!email) throw new Error('Not signed in')
+    const res = await authFetch(API_ENDPOINTS.AUTH_DELETE_ACCOUNT, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password }),
+    })
+    const data = await res.json().catch(() => ({}))
+    if (!res.ok) {
+      throw new Error(data.error || 'Could not delete account')
+    }
+    try {
+      clearLegacyLocalCells(email)
+    } catch {
+      /* ignore */
+    }
+    setStoredToken('')
+    setUser(null)
+  }, [user?.email])
+
   const value = useMemo(
     () => ({
       user,
@@ -85,9 +107,10 @@ export function AuthProvider({ children }) {
       login,
       register,
       logout,
+      deleteAccount,
       refreshSession: bootstrap,
     }),
-    [user, loading, login, register, logout, bootstrap]
+    [user, loading, login, register, logout, deleteAccount, bootstrap]
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

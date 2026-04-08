@@ -16,6 +16,7 @@ import Flashcards from './pages/Flashcards'
 import Calories from './pages/Calories'
 import StoicJournal from './pages/StoicJournal'
 import MealPlan from './pages/MealPlan'
+import AccountPage from './pages/AccountPage'
 import LoginSplash from './pages/LoginSplash'
 import ThemeToggle from './components/ThemeToggle'
 import { ThemeProvider } from './context/ThemeContext'
@@ -109,6 +110,16 @@ function Navbar() {
               {user?.email && (
                 <span className="nav-user-email" title={user.email}>{user.email}</span>
               )}
+              <Link
+                to="/account"
+                className="nav-dropdown-link"
+                onClick={() => {
+                  setProfileOpen(false)
+                  scrollToTop()
+                }}
+              >
+                Account
+              </Link>
               <div className="nav-theme-wrap">
                 <ThemeToggle />
               </div>
@@ -159,6 +170,9 @@ function Navbar() {
         {user?.email && (
           <span className="nav-drawer-email">{user.email}</span>
         )}
+        <Link to="/account" className="nav-drawer-link" onClick={scrollToTop}>
+          Account
+        </Link>
         <button type="button" className="nav-drawer-link nav-drawer-logout" onClick={handleLogout}>
           Sign out
         </button>
@@ -207,6 +221,7 @@ function AppRoutes() {
         <Route path="/calories" element={<Calories />} />
         <Route path="/stoic" element={<StoicJournal />} />
         <Route path="/recipes" element={<MealPlan />} />
+        <Route path="/account" element={<AccountPage />} />
       </Route>
     </Routes>
   )

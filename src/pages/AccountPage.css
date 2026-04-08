@@ -1,0 +1,134 @@
+.account-page {
+  padding: 5.5rem 1rem 2rem;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.account-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.account-header {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+.account-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.account-email {
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  word-break: break-all;
+}
+
+.account-back {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+.account-back:hover {
+  text-decoration: underline;
+}
+
+.account-danger {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.1rem 1.15rem;
+  background: var(--bg-secondary);
+}
+
+.account-danger-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #b91c1c;
+}
+
+[data-theme='dark'] .account-danger-title {
+  color: #fca5a5;
+}
+
+.account-danger-copy {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.account-delete-form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.account-delete-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.account-delete-input {
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.account-delete-input:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 1px;
+}
+
+.account-delete-error {
+  font-size: 0.85rem;
+  color: #b91c1c;
+}
+
+[data-theme='dark'] .account-delete-error {
+  color: #fca5a5;
+}
+
+.account-delete-submit {
+  align-self: flex-start;
+  margin-top: 0.25rem;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid #b91c1c;
+  border-radius: 6px;
+  background: transparent;
+  color: #b91c1c;
+  cursor: pointer;
+}
+
+.account-delete-submit:hover:not(:disabled) {
+  background: rgba(185, 28, 28, 0.08);
+}
+
+.account-delete-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+[data-theme='dark'] .account-delete-submit {
+  border-color: #fca5a5;
+  color: #fca5a5;
+}
+
+[data-theme='dark'] .account-delete-submit:hover:not(:disabled) {
+  background: rgba(252, 165, 165, 0.1);
+}

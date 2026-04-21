@@ -59,7 +59,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="nav-container">
         <div className="nav-logo">
-          <h2>Minerva</h2>
+          <h2>Habits</h2>
         </div>
 
         {/* Desktop nav links */}
@@ -69,7 +69,7 @@ function Navbar() {
             className={`nav-link ${location.pathname === '/' || location.pathname === '/month' ? 'active' : ''}`}
             onClick={scrollToTop}
           >
-            Minerva
+            Habits
           </Link>
           <Link to="/todos" className={`nav-link ${location.pathname === '/todos' ? 'active' : ''}`} onClick={scrollToTop}>
             Todos
@@ -159,7 +159,7 @@ function Navbar() {
           className={`nav-drawer-link ${location.pathname === '/' || location.pathname === '/month' ? 'active' : ''}`}
           onClick={scrollToTop}
         >
-          Minerva
+          Habits
         </Link>
         <Link to="/todos" className={`nav-drawer-link ${location.pathname === '/todos' ? 'active' : ''}`} onClick={scrollToTop}>
           Todos

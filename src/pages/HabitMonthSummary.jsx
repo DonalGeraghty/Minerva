@@ -1,8 +1,8 @@
 import { Navigate } from 'react-router-dom'
 
-/** Legacy route: week and activity now share the home page. */
+/** Legacy route: month summary now lives with the habit tracker. */
 function HabitMonthSummary() {
-  return <Navigate to="/" replace />
+  return <Navigate to="/habits" replace />
 }
 
 export default HabitMonthSummary

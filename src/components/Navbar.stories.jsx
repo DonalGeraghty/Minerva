@@ -24,14 +24,14 @@ function Navbar() {
     <nav className="navbar">
       <div className="nav-container">
         <div className="nav-logo">
-          <h2>Habits</h2>
+          <h2>Minerva</h2>
         </div>
         <div className="nav-links">
           <button
             type="button"
-            className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+            className={`nav-link ${location.pathname === '/habits' ? 'active' : ''}`}
             onClick={() => {
-              setLocation({ pathname: '/' });
+              setLocation({ pathname: '/habits' });
               scrollToTop();
             }}
           >

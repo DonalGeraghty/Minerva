@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom'
 import './App.css'
 import './components/Navbar.css'
+import MinervaHome from './pages/MinervaHome'
 import HabitTracker from './pages/HabitTracker'
 import HabitMonthSummary from './pages/HabitMonthSummary'
 import Todos from './pages/Todos'
@@ -59,14 +60,20 @@ function Navbar() {
     <nav className="navbar">
       <div className="nav-container">
         <div className="nav-logo">
-          <h2>Habits</h2>
+          <Link
+            to="/"
+            className={`nav-logo-link${location.pathname === '/' ? ' is-active' : ''}`}
+            onClick={scrollToTop}
+          >
+            <h2>Minerva</h2>
+          </Link>
         </div>
 
         {/* Desktop nav links */}
         <div className="nav-links nav-links--desktop">
           <Link
-            to="/"
-            className={`nav-link ${location.pathname === '/' || location.pathname === '/month' ? 'active' : ''}`}
+            to="/habits"
+            className={`nav-link ${location.pathname === '/habits' || location.pathname === '/month' ? 'active' : ''}`}
             onClick={scrollToTop}
           >
             Habits
@@ -155,8 +162,8 @@ function Navbar() {
       {/* Mobile drawer */}
       <div className={`nav-drawer ${menuOpen ? 'is-open' : ''}`} aria-hidden={!menuOpen}>
         <Link
-          to="/"
-          className={`nav-drawer-link ${location.pathname === '/' || location.pathname === '/month' ? 'active' : ''}`}
+          to="/habits"
+          className={`nav-drawer-link ${location.pathname === '/habits' || location.pathname === '/month' ? 'active' : ''}`}
           onClick={scrollToTop}
         >
           Habits
@@ -224,7 +231,8 @@ function AppRoutes() {
   return (
     <Routes>
       <Route element={<ProtectedLayout />}>
-        <Route path="/" element={<HabitTracker />} />
+        <Route path="/" element={<MinervaHome />} />
+        <Route path="/habits" element={<HabitTracker />} />
         <Route path="/month" element={<HabitMonthSummary />} />
         <Route path="/todos" element={<Todos />} />
         <Route path="/flashcards" element={<Flashcards />} />

@@ -34,6 +34,26 @@
   margin: 0;
 }
 
+.nav-logo-link {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+  border-radius: 8px;
+  padding: 0.1rem 0.35rem;
+  margin: -0.1rem -0.35rem;
+  border: 2px solid transparent;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-logo-link:hover h2 {
+  opacity: 0.95;
+}
+
+.nav-logo-link.is-active {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
 /* ── Shared link style ── */
 .nav-link {
   color: white;

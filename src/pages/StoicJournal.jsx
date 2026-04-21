@@ -350,8 +350,8 @@ function StoicJournal() {
 
         <p className="hub-body">
           This journal is scoped to <strong>today only</strong> ({prettyDate}). At midnight it resets for the next day
-          and the previous day entry is deleted. You can pair this with your <Link to="/#activity">habits / activity</Link> page to
-          spot consistency trends.
+          and the previous day entry is deleted. You can pair this with your{' '}
+          <Link to="/habits#activity">habits / activity</Link> page to spot consistency trends.
         </p>
         {error ? <p className="hub-body">{error}</p> : null}
         {plannerError ? <p className="hub-body">{plannerError}</p> : null}

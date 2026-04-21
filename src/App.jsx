@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -6,84 +6,106 @@ import {
   Link,
   useLocation,
   Outlet,
-} from 'react-router-dom'
-import './App.css'
-import './components/Navbar.css'
-import HabitTracker from './pages/HabitTracker'
-import HabitMonthSummary from './pages/HabitMonthSummary'
-import Todos from './pages/Todos'
-import Flashcards from './pages/Flashcards'
-import Calories from './pages/Calories'
-import StoicJournal from './pages/StoicJournal'
-import MealPlan from './pages/MealPlan'
-import AccountPage from './pages/AccountPage'
-import LoginSplash from './pages/LoginSplash'
-import ThemeToggle from './components/ThemeToggle'
-import { ThemeProvider } from './context/ThemeContext'
-import { AuthProvider, useAuth } from './context/AuthContext'
-import { HabitDataProvider } from './context/HabitDataContext'
+} from "react-router-dom";
+import "./App.css";
+import "./components/Navbar.css";
+import HabitTracker from "./pages/HabitTracker";
+import HabitMonthSummary from "./pages/HabitMonthSummary";
+import Todos from "./pages/Todos";
+import Flashcards from "./pages/Flashcards";
+import Calories from "./pages/Calories";
+import StoicJournal from "./pages/StoicJournal";
+import MealPlan from "./pages/MealPlan";
+import AccountPage from "./pages/AccountPage";
+import LoginSplash from "./pages/LoginSplash";
+import ThemeToggle from "./components/ThemeToggle";
+import { ThemeProvider } from "./context/ThemeContext";
+import { AuthProvider, useAuth } from "./context/AuthContext";
+import { HabitDataProvider } from "./context/HabitDataContext";
 
 function Navbar() {
-  const [currentTime, setCurrentTime] = useState(new Date())
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [moreOpen, setMoreOpen] = useState(false)
-  const [profileOpen, setProfileOpen] = useState(false)
-  const location = useLocation()
-  const { user, logout } = useAuth()
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const location = useLocation();
+  const { user, logout } = useAuth();
 
   useEffect(() => {
-    const timer = setInterval(() => setCurrentTime(new Date()), 1000)
-    return () => clearInterval(timer)
-  }, [])
+    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   // Close menu on route change
   useEffect(() => {
-    setMenuOpen(false)
-    setMoreOpen(false)
-    setProfileOpen(false)
-  }, [location.pathname])
+    setMenuOpen(false);
+    setMoreOpen(false);
+    setProfileOpen(false);
+  }, [location.pathname]);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-    setMenuOpen(false)
-  }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setMenuOpen(false);
+  };
 
   const handleLogout = () => {
-    setMenuOpen(false)
-    setMoreOpen(false)
-    setProfileOpen(false)
-    logout()
-  }
+    setMenuOpen(false);
+    setMoreOpen(false);
+    setProfileOpen(false);
+    logout();
+  };
 
   return (
     <nav className="navbar">
       <div className="nav-container">
         <div className="nav-logo">
-          <h2>Minerva</h2>
+          <h2>
+            <a href="/splash">Minerva</a>
+          </h2>
         </div>
 
         {/* Desktop nav links */}
         <div className="nav-links nav-links--desktop">
           <Link
             to="/"
-            className={`nav-link ${location.pathname === '/' || location.pathname === '/month' ? 'active' : ''}`}
+            className={`nav-link ${location.pathname === "/" || location.pathname === "/month" ? "active" : ""}`}
             onClick={scrollToTop}
           >
-            Minerva
+            Habits
           </Link>
-          <Link to="/todos" className={`nav-link ${location.pathname === '/todos' ? 'active' : ''}`} onClick={scrollToTop}>
+          <Link
+            to="/todos"
+            className={`nav-link ${location.pathname === "/todos" ? "active" : ""}`}
+            onClick={scrollToTop}
+          >
             Todos
           </Link>
-          <Link to="/flashcards" className={`nav-link ${location.pathname === '/flashcards' ? 'active' : ''}`} onClick={scrollToTop}>
+          <Link
+            to="/flashcards"
+            className={`nav-link ${location.pathname === "/flashcards" ? "active" : ""}`}
+            onClick={scrollToTop}
+          >
             Flashcards
           </Link>
-          <Link to="/calories" className={`nav-link ${location.pathname === '/calories' ? 'active' : ''}`} onClick={scrollToTop}>
+          <Link
+            to="/calories"
+            className={`nav-link ${location.pathname === "/calories" ? "active" : ""}`}
+            onClick={scrollToTop}
+          >
             Calories
           </Link>
-          <Link to="/stoic" className={`nav-link ${location.pathname === '/stoic' ? 'active' : ''}`} onClick={scrollToTop}>
+          <Link
+            to="/stoic"
+            className={`nav-link ${location.pathname === "/stoic" ? "active" : ""}`}
+            onClick={scrollToTop}
+          >
             Stoic
           </Link>
-          <Link to="/recipes" className={`nav-link ${location.pathname === '/recipes' ? 'active' : ''}`} onClick={scrollToTop}>
+          <Link
+            to="/recipes"
+            className={`nav-link ${location.pathname === "/recipes" ? "active" : ""}`}
+            onClick={scrollToTop}
+          >
             Recipes
           </Link>
         </div>
@@ -91,8 +113,17 @@ function Navbar() {
         {/* Desktop right section */}
         <div className="nav-right nav-right--desktop">
           <p className="nav-time-muted">
-            {currentTime.toLocaleDateString('en-IE', { weekday: 'short', month: 'short', day: 'numeric' })}{' '}
-            {currentTime.toLocaleTimeString('en-IE', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+            {currentTime.toLocaleDateString("en-IE", {
+              weekday: "short",
+              month: "short",
+              day: "numeric",
+            })}{" "}
+            {currentTime.toLocaleTimeString("en-IE", {
+              hour12: false,
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+            })}
           </p>
           <div className="nav-dropdown-wrap">
             <button
@@ -100,23 +131,28 @@ function Navbar() {
               className="nav-link nav-dropdown-btn"
               data-testid="nav-profile-menu"
               onClick={() => {
-                setProfileOpen((v) => !v)
-                setMoreOpen(false)
+                setProfileOpen((v) => !v);
+                setMoreOpen(false);
               }}
               aria-expanded={profileOpen}
             >
               Profile
             </button>
-            <div className={`nav-dropdown-menu nav-dropdown-menu--profile ${profileOpen ? 'is-open' : ''}`} aria-hidden={!profileOpen}>
+            <div
+              className={`nav-dropdown-menu nav-dropdown-menu--profile ${profileOpen ? "is-open" : ""}`}
+              aria-hidden={!profileOpen}
+            >
               {user?.email && (
-                <span className="nav-user-email" title={user.email}>{user.email}</span>
+                <span className="nav-user-email" title={user.email}>
+                  {user.email}
+                </span>
               )}
               <Link
                 to="/account"
                 className="nav-dropdown-link"
                 onClick={() => {
-                  setProfileOpen(false)
-                  scrollToTop()
+                  setProfileOpen(false);
+                  scrollToTop();
                 }}
               >
                 Account
@@ -143,71 +179,109 @@ function Navbar() {
             type="button"
             className="nav-hamburger"
             data-testid="nav-mobile-menu"
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((o) => !o)}
           >
-            <span className={`nav-hamburger-icon ${menuOpen ? 'is-open' : ''}`} />
+            <span
+              className={`nav-hamburger-icon ${menuOpen ? "is-open" : ""}`}
+            />
           </button>
         </div>
       </div>
 
       {/* Mobile drawer */}
-      <div className={`nav-drawer ${menuOpen ? 'is-open' : ''}`} aria-hidden={!menuOpen}>
+      <div
+        className={`nav-drawer ${menuOpen ? "is-open" : ""}`}
+        aria-hidden={!menuOpen}
+      >
         <Link
           to="/"
-          className={`nav-drawer-link ${location.pathname === '/' || location.pathname === '/month' ? 'active' : ''}`}
+          className={`nav-drawer-link ${location.pathname === "/" || location.pathname === "/month" ? "active" : ""}`}
           onClick={scrollToTop}
         >
-          Minerva
+          Habits
         </Link>
-        <Link to="/todos" className={`nav-drawer-link ${location.pathname === '/todos' ? 'active' : ''}`} onClick={scrollToTop}>
+        <Link
+          to="/todos"
+          className={`nav-drawer-link ${location.pathname === "/todos" ? "active" : ""}`}
+          onClick={scrollToTop}
+        >
           Todos
         </Link>
-        <Link to="/flashcards" className={`nav-drawer-link ${location.pathname === '/flashcards' ? 'active' : ''}`} onClick={scrollToTop}>
+        <Link
+          to="/flashcards"
+          className={`nav-drawer-link ${location.pathname === "/flashcards" ? "active" : ""}`}
+          onClick={scrollToTop}
+        >
           Flashcards
         </Link>
-        <Link to="/calories" className={`nav-drawer-link ${location.pathname === '/calories' ? 'active' : ''}`} onClick={scrollToTop}>
+        <Link
+          to="/calories"
+          className={`nav-drawer-link ${location.pathname === "/calories" ? "active" : ""}`}
+          onClick={scrollToTop}
+        >
           Calories
         </Link>
-        <Link to="/stoic" className={`nav-drawer-link ${location.pathname === '/stoic' ? 'active' : ''}`} onClick={scrollToTop}>
+        <Link
+          to="/stoic"
+          className={`nav-drawer-link ${location.pathname === "/stoic" ? "active" : ""}`}
+          onClick={scrollToTop}
+        >
           Stoic
         </Link>
-        <Link to="/recipes" className={`nav-drawer-link ${location.pathname === '/recipes' ? 'active' : ''}`} onClick={scrollToTop}>
+        <Link
+          to="/recipes"
+          className={`nav-drawer-link ${location.pathname === "/recipes" ? "active" : ""}`}
+          onClick={scrollToTop}
+        >
           Recipes
         </Link>
         <hr className="nav-drawer-divider" />
-        {user?.email && (
-          <span className="nav-drawer-email">{user.email}</span>
-        )}
+        {user?.email && <span className="nav-drawer-email">{user.email}</span>}
         <Link to="/account" className="nav-drawer-link" onClick={scrollToTop}>
           Account
         </Link>
-        <button type="button" className="nav-drawer-link nav-drawer-logout" data-testid="nav-drawer-sign-out" onClick={handleLogout}>
+        <button
+          type="button"
+          className="nav-drawer-link nav-drawer-logout"
+          data-testid="nav-drawer-sign-out"
+          onClick={handleLogout}
+        >
           Sign out
         </button>
         <div className="nav-drawer-time">
-          {currentTime.toLocaleDateString('en-IE', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' })}{' '}
-          {currentTime.toLocaleTimeString('en-IE', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+          {currentTime.toLocaleDateString("en-IE", {
+            weekday: "long",
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })}{" "}
+          {currentTime.toLocaleTimeString("en-IE", {
+            hour12: false,
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          })}
         </div>
       </div>
     </nav>
-  )
+  );
 }
 
 function ProtectedLayout() {
-  const { user, loading } = useAuth()
+  const { user, loading } = useAuth();
 
   if (loading) {
     return (
       <div className="auth-loading" role="status" aria-live="polite">
         <p>Loading…</p>
       </div>
-    )
+    );
   }
 
   if (!user) {
-    return <LoginSplash />
+    return <LoginSplash />;
   }
 
   return (
@@ -217,7 +291,7 @@ function ProtectedLayout() {
         <Outlet />
       </HabitDataProvider>
     </div>
-  )
+  );
 }
 
 function AppRoutes() {
@@ -234,7 +308,7 @@ function AppRoutes() {
         <Route path="/account" element={<AccountPage />} />
       </Route>
     </Routes>
-  )
+  );
 }
 
 function App() {
@@ -246,7 +320,7 @@ function App() {
         </Router>
       </AuthProvider>
     </ThemeProvider>
-  )
+  );
 }
 
-export default App
+export default App;

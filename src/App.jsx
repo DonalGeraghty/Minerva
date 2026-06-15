@@ -17,6 +17,7 @@ import Flashcards from './pages/Flashcards'
 import Calories from './pages/Calories'
 import StoicJournal from './pages/StoicJournal'
 import MealPlan from './pages/MealPlan'
+import Pomodoro from './pages/Pomodoro'
 import AccountPage from './pages/AccountPage'
 import LoginSplash from './pages/LoginSplash'
 import ThemeToggle from './components/ThemeToggle'
@@ -92,6 +93,9 @@ function Navbar() {
           </Link>
           <Link to="/recipes" className={`nav-link ${location.pathname === '/recipes' ? 'active' : ''}`} onClick={scrollToTop}>
             Recipes
+          </Link>
+          <Link to="/pomodoro" className={`nav-link ${location.pathname === '/pomodoro' ? 'active' : ''}`} onClick={scrollToTop}>
+            Pomodoro
           </Link>
         </div>
 
@@ -183,6 +187,9 @@ function Navbar() {
         <Link to="/recipes" className={`nav-drawer-link ${location.pathname === '/recipes' ? 'active' : ''}`} onClick={scrollToTop}>
           Recipes
         </Link>
+        <Link to="/pomodoro" className={`nav-drawer-link ${location.pathname === '/pomodoro' ? 'active' : ''}`} onClick={scrollToTop}>
+          Pomodoro
+        </Link>
         <hr className="nav-drawer-divider" />
         {user?.email && (
           <span className="nav-drawer-email">{user.email}</span>
@@ -239,6 +246,7 @@ function AppRoutes() {
         <Route path="/calories" element={<Calories />} />
         <Route path="/stoic" element={<StoicJournal />} />
         <Route path="/recipes" element={<MealPlan />} />
+        <Route path="/pomodoro" element={<Pomodoro />} />
         <Route path="/account" element={<AccountPage />} />
       </Route>
     </Routes>

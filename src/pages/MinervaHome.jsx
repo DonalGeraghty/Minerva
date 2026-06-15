@@ -10,6 +10,7 @@ const TOOLS = [
   { to: '/calories', title: 'Calories', blurb: 'Nutrition history.' },
   { to: '/stoic', title: 'Stoic', blurb: 'Day plan and evening review.' },
   { to: '/recipes', title: 'Recipes', blurb: 'Trainer meal plan and tracking.' },
+  { to: '/pomodoro', title: 'Pomodoro', blurb: 'Focus timer and break cadence.' },
   { to: '/account', title: 'Account', blurb: 'Profile and settings.' },
 ]
 

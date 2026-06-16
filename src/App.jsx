@@ -18,6 +18,7 @@ import Calories from './pages/Calories'
 import StoicJournal from './pages/StoicJournal'
 import MealPlan from './pages/MealPlan'
 import Pomodoro from './pages/Pomodoro'
+import GoalTracker from './pages/GoalTracker'
 import AccountPage from './pages/AccountPage'
 import LoginSplash from './pages/LoginSplash'
 import ThemeToggle from './components/ThemeToggle'
@@ -81,6 +82,9 @@ function Navbar() {
           </Link>
           <Link to="/todos" className={`nav-link ${location.pathname === '/todos' ? 'active' : ''}`} onClick={scrollToTop}>
             Todos
+          </Link>
+          <Link to="/goals" className={`nav-link ${location.pathname === '/goals' ? 'active' : ''}`} onClick={scrollToTop}>
+            Goals
           </Link>
           <Link to="/flashcards" className={`nav-link ${location.pathname === '/flashcards' ? 'active' : ''}`} onClick={scrollToTop}>
             Flashcards
@@ -175,6 +179,9 @@ function Navbar() {
         <Link to="/todos" className={`nav-drawer-link ${location.pathname === '/todos' ? 'active' : ''}`} onClick={scrollToTop}>
           Todos
         </Link>
+        <Link to="/goals" className={`nav-drawer-link ${location.pathname === '/goals' ? 'active' : ''}`} onClick={scrollToTop}>
+          Goals
+        </Link>
         <Link to="/flashcards" className={`nav-drawer-link ${location.pathname === '/flashcards' ? 'active' : ''}`} onClick={scrollToTop}>
           Flashcards
         </Link>
@@ -242,6 +249,7 @@ function AppRoutes() {
         <Route path="/habits" element={<HabitTracker />} />
         <Route path="/month" element={<HabitMonthSummary />} />
         <Route path="/todos" element={<Todos />} />
+        <Route path="/goals" element={<GoalTracker />} />
         <Route path="/flashcards" element={<Flashcards />} />
         <Route path="/calories" element={<Calories />} />
         <Route path="/stoic" element={<StoicJournal />} />

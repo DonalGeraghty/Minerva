@@ -23,6 +23,12 @@ export const API_ENDPOINTS = {
   DAY_PLANNER_DAILY: '/api/user/day-planner/daily',
   USER_MEAL_PLAN: '/api/user/meal-plan',
   USER_GOALS: '/api/user/goals',
+  USER_SLEEP: '/api/user/sleep',
+  USER_ACHIEVEMENTS: '/api/user/achievements',
+  USER_ACHIEVEMENTS_UNLOCK: '/api/user/achievements/unlock',
+  USER_ACHIEVEMENTS_DEFINITIONS: '/api/user/achievements/definitions',
+  USER_STATS: '/api/user/stats',
+  USER_EXPORT: '/api/user/export',
 }
 
 const TOKEN_KEY = 'dg_auth_token'

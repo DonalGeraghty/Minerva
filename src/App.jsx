@@ -13,12 +13,15 @@ import MinervaHome from './pages/MinervaHome'
 import HabitTracker from './pages/HabitTracker'
 import HabitMonthSummary from './pages/HabitMonthSummary'
 import Todos from './pages/Todos'
+import GoalTracker from './pages/GoalTracker'
+import SleepTracker from './pages/SleepTracker'
+import Achievements from './pages/Achievements'
+import ExportPage from './pages/ExportPage'
 import Flashcards from './pages/Flashcards'
 import Calories from './pages/Calories'
 import StoicJournal from './pages/StoicJournal'
 import MealPlan from './pages/MealPlan'
 import Pomodoro from './pages/Pomodoro'
-import GoalTracker from './pages/GoalTracker'
 import AccountPage from './pages/AccountPage'
 import LoginSplash from './pages/LoginSplash'
 import ThemeToggle from './components/ThemeToggle'
@@ -85,6 +88,15 @@ function Navbar() {
           </Link>
           <Link to="/goals" className={`nav-link ${location.pathname === '/goals' ? 'active' : ''}`} onClick={scrollToTop}>
             Goals
+          </Link>
+          <Link to="/sleep" className={`nav-link ${location.pathname === '/sleep' ? 'active' : ''}`} onClick={scrollToTop}>
+            Sleep
+          </Link>
+          <Link to="/achievements" className={`nav-link ${location.pathname === '/achievements' ? 'active' : ''}`} onClick={scrollToTop}>
+            Achievements
+          </Link>
+          <Link to="/export" className={`nav-link ${location.pathname === '/export' ? 'active' : ''}`} onClick={scrollToTop}>
+            Export
           </Link>
           <Link to="/flashcards" className={`nav-link ${location.pathname === '/flashcards' ? 'active' : ''}`} onClick={scrollToTop}>
             Flashcards
@@ -182,6 +194,15 @@ function Navbar() {
         <Link to="/goals" className={`nav-drawer-link ${location.pathname === '/goals' ? 'active' : ''}`} onClick={scrollToTop}>
           Goals
         </Link>
+        <Link to="/sleep" className={`nav-drawer-link ${location.pathname === '/sleep' ? 'active' : ''}`} onClick={scrollToTop}>
+          Sleep
+        </Link>
+        <Link to="/achievements" className={`nav-drawer-link ${location.pathname === '/achievements' ? 'active' : ''}`} onClick={scrollToTop}>
+          Achievements
+        </Link>
+        <Link to="/export" className={`nav-drawer-link ${location.pathname === '/export' ? 'active' : ''}`} onClick={scrollToTop}>
+          Export
+        </Link>
         <Link to="/flashcards" className={`nav-drawer-link ${location.pathname === '/flashcards' ? 'active' : ''}`} onClick={scrollToTop}>
           Flashcards
         </Link>
@@ -250,6 +271,9 @@ function AppRoutes() {
         <Route path="/month" element={<HabitMonthSummary />} />
         <Route path="/todos" element={<Todos />} />
         <Route path="/goals" element={<GoalTracker />} />
+        <Route path="/sleep" element={<SleepTracker />} />
+        <Route path="/achievements" element={<Achievements />} />
+        <Route path="/export" element={<ExportPage />} />
         <Route path="/flashcards" element={<Flashcards />} />
         <Route path="/calories" element={<Calories />} />
         <Route path="/stoic" element={<StoicJournal />} />

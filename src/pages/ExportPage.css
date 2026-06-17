@@ -2,7 +2,7 @@
 
 .export-page {
   min-height: 100vh;
-  padding: 1.5rem;
+  padding: 5.5rem 1.5rem 2rem;
   max-width: 800px;
   margin: 0 auto;
 }
@@ -146,7 +146,7 @@
 /* Responsive */
 @media (max-width: 768px) {
   .export-page {
-    padding: 1rem;
+    padding: 5.5rem 1rem 2rem;
   }
 
   .export-title {

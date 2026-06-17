@@ -6,6 +6,7 @@ import './MinervaHome.css'
 const TOOLS = [
   { to: '/habits', title: 'Habits', blurb: 'Daily habit grid and streaks.' },
   { to: '/todos', title: 'Todos', blurb: 'Quick capture list.' },
+  { to: '/goals', title: 'Goals', blurb: 'Track progress toward long-term objectives.' },
   { to: '/flashcards', title: 'Flashcards', blurb: 'Groups, cards, and study mode.' },
   { to: '/calories', title: 'Calories', blurb: 'Nutrition history.' },
   { to: '/stoic', title: 'Stoic', blurb: 'Day plan and evening review.' },
